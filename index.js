@@ -27,4 +27,6 @@ const promptList =
     },
     ]
 
-inquirer.prompt(promptList).then({ text, textcolor, shape, shapecolor}) => 
+inquirer.prompt(promptList).then(({ text, textcolor, shape, shapecolor})) => {
+    fs.writeFile("logo.svg", svg.render(), (err) => {err ? console.log(err) : console.log("Generated logo.svg")})
+})
