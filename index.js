@@ -26,7 +26,7 @@ const promptList = [
     },
     ]
 
-    inquirer.prompt(questions).then(({ text, textcolor, shape, shapecolor }) => {
+    inquirer.prompt(promptList).then(({ text, textcolor, shape, shapecolor }) => {
         let shapetype;
         switch (shape) {
             case 'square':
