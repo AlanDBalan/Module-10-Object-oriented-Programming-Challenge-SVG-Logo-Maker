@@ -1,6 +1,8 @@
 const inquirer = require('inquirer');
 
 const fs = require('fs');
+const { Square, Triangle, Circle } = require("./lib/shapes.js");
+const SVG = require("./lib/svg.js");
 
 const promptList = [
     {
@@ -29,13 +31,13 @@ const promptList = [
     inquirer.prompt(promptList).then(({ text, textcolor, shape, shapecolor }) => {
         let shapetype;
         switch (shape) {
-            case 'square':
+            case 'Square':
                 shapetype = new Square();
                 break;
-            case 'circle':
+            case 'Circle':
                 shapetype = new Circle();
                 break;
-            case 'triangle':
+            case 'Triangle':
                 shapetype = new Triangle();
                 break;
         }
