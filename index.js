@@ -2,8 +2,7 @@ const inquirer = require('inquirer');
 
 const fs = require('fs');
 
-const promptList = 
-    [
+const promptList = [
     {
         type: 'input',
         message: 'What text do you want?',
@@ -27,6 +26,26 @@ const promptList =
     },
     ]
 
-inquirer.prompt(promptList).then(({ text, textcolor, shape, shapecolor})) => {
-    fs.writeFile("logo.svg", svg.render(), (err) => {err ? console.log(err) : console.log("Generated logo.svg")})
-})
+    inquirer.prompt(questions).then(({ text, textcolor, shape, shapecolor }) => {
+        let shapetype;
+        switch (shape) {
+            case 'square':
+                shapetype = new Square();
+                break;
+            case 'circle':
+                shapetype = new Circle();
+                break;
+            case 'triangle':
+                shapetype = new Triangle();
+                break;
+        }
+    
+        shapetype.setColor(shapecolor);
+    
+        const svg = new SVG();
+        svg.setText(text, textcolor);
+        svg.setShape(shapetype);
+        console.log(svg.render());
+        
+        fs.writeFile('./logo.svg', svg.render(), (err) => {err ? console.log(err) : console.log('You generated a logo!')});
+    })
